@@ -10,11 +10,25 @@ const resetBtn = document.querySelector(".resetBtn");
 const playerOne = "X";
 const playerTwo = "O";
 //functions
+
 const playerMove = () => {
-  cells.forEach((cell) => {
-    cell.addEventListener("click", () => {
-      cell.append(playerOne);
+  if (playerTitle.innerHTML === "Player: 1") {
+    cells.forEach((cell) => {
+      cell.addEventListener("click", () => {
+        cell.append(playerOne);
+      });
     });
-  });
+  } else if (playerTitle.innerHTML === "Player: 2") {
+    cells.forEach((cell) => {
+      cell.addEventListener("click", () => {
+        cell.append(playerTwo);
+      });
+    });
+  }
 };
-playerMove();
+
+const playerTurn = () => {
+  playerMove();
+};
+
+playerTurn();
