@@ -7,49 +7,38 @@ const cells = document.querySelectorAll(".cell");
 const startPauseBtn = document.querySelector("start-btn");
 const resetBtn = document.querySelector(".resetBtn");
 
-let currentPlayer = "X";
+let currentPlayer = document.createElement("p");
+currentPlayer.classList.add("current-player");
+currentPlayer.innerHTML = "X";
 ticTacToeBoard.classList.add("player-turn");
 //functions
 
 const playerMove = () => {
   cells.forEach((cell) => {
-    if (ticTacToeBoard.classList.contains("player-turn")) {
-      cell.addEventListener("click", () => {
+    const playerEventListener = () => {
+      if (ticTacToeBoard.classList.contains("player-turn")) {
+        let currentPlayer = document.createElement("p");
+        currentPlayer.classList.add("current-player");
+        currentPlayer.innerHTML = "X";
         cell.append(currentPlayer);
         playerTitle.innerHTML = "Player: 2";
-        currentPlayer = "O";
+
+        cell.classList.add("player-one-move");
         ticTacToeBoard.classList.toggle("player-turn");
-      });
-    } else if (ticTacToeBoard.classList.contains("player-turn") === false) {
-      cell.addEventListener("click", () => {
+      } else {
+        let currentPlayer = document.createElement("p");
+        currentPlayer.classList.add("current-player");
+        currentPlayer.innerHTML = "O";
         cell.append(currentPlayer);
         playerTitle.innerHTML = "Player: 1";
-        currentPlayer = "X";
+
+        cell.classList.add("player-two-move");
         ticTacToeBoard.classList.toggle("player-turn");
-      });
-    }
+      }
+    };
+
+    cell.addEventListener("click", playerEventListener, { once: true });
   });
 };
 
 playerMove();
-
-// const playerMove = () => {
-//   cells.forEach((cell) => {
-//     if (<gamebored.classlist.contains("blah")) {
-//       cell.addEventListener("click", () => {
-//         cell.append(currentPlayer);
-//         playerTitle.innerHTML = "Player: 2";
-//         currentPlayer = "O";
-//         gamebored.classlist.toggle("blah")
-//       });
-//     } else if (gamebored.classlist.contains("blah") === false) {
-//       cell.addEventListener("click", () => {
-//         cell.append(currentPlayer);
-//         playerTitle.innerHTML = "Player: 1";
-//         currentPlayer = "X";
-//         gamebored.classlist.toggle("blah")
-//       });
-//     }
-//   });
-// };
-// playerMove();
