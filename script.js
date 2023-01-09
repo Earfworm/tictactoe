@@ -60,19 +60,6 @@ const playerMove = () => {
     cell.addEventListener("click", playerEventListener, { once: true });
   });
 };
-
-const startGame = () => {
-  startPauseBtn.addEventListener("click", () => {
-    if (startPauseBtn.textContent === "Start Game") {
-      startPauseBtn.textContent = "Pause";
-    } else {
-      startPauseBtn.textContent = "Start Game";
-    }
-  });
-};
-
-startGame();
-
 const stopWatch = () => {
   seconds++;
   if (seconds / 60 === 1) {
@@ -99,9 +86,24 @@ const startStop = () => {
   if (stopWatchStatus === "stopped") {
     interval = setInterval(stopWatch, 1000);
     stopWatchStatus = "started";
+    startPauseBtn.textContent = "Pause";
   } else {
     clearInterval(interval);
     stopWatchStatus = "stopped";
+    startPauseBtn.textContent = "Start Game";
   }
 };
-startStop();
+
+const startGame = () => {
+  startPauseBtn.addEventListener("click", () => {
+    if (startPauseBtn.textContent === "Start Game") {
+      startPauseBtn.textContent = "Pause";
+      startStop();
+    } else if ((startPauseBtn.textContent = "Pause")) {
+      startPauseBtn.textContent = "Start Game";
+      startStop();
+    }
+  });
+};
+
+startGame();
