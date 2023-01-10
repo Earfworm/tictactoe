@@ -6,6 +6,7 @@ const ticTacToeBoard = document.querySelector(".tic-tac-toe-container");
 const cells = document.querySelectorAll(".cell");
 const startPauseBtn = document.querySelector(".start-btn");
 const resetBtn = document.querySelector(".resetBtn");
+
 let seconds = 0;
 let minutes = 0;
 let displaySeconds = 0;
@@ -27,25 +28,40 @@ const playerMove = () => {
         playerTitle.innerHTML = "Player: 2";
         ticTacToeBoard.classList.toggle("player-turn");
         if (
-          (cells[0].classList.contains("player-1") &&
-            cells[0].getAttribute("id") === "box-1" &&
-            cells[1].classList.contains("player-1") &&
-            cells[1].getAttribute("id") === "box-2" &&
-            cells[2].getAttribute("id") === "box-3") ||
-          (cells[3].getAttribute("id") === "box-4" &&
-            cells[4].getAttribute("id") === "box-5" &&
-            cells[5].getAttribute("id") === "box-6") ||
-          (cells[6].getAttribute("id") === "box-7" &&
-            cells[7].getAttribute("id") === "box-8" &&
-            cells[8].getAttribute("id") === "box-9") ||
-          (cells[0].getAttribute("id") === "box-1" &&
-            cells[3].getAttribute("id") === "box-4" &&
-            cells[6].getAttribute("id") === "box-7") ||
-          (cells[1].getAttribute("id") === "box-2" &&
-            cells[4].getAttribute("id") === "box-5" &&
-            cells[7].getAttribute("id") === "box-8")
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-1" &&
+            cell.getAttribute("id") === "box-2" &&
+            cell.getAttribute("id") === "box-3") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-4" &&
+            cell.getAttribute("id") === "box-5" &&
+            cell.getAttribute("id") === "box-6") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-7" &&
+            cell.getAttribute("id") === "box-8" &&
+            cell.getAttribute("id") === "box-9") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-1" &&
+            cell.getAttribute("id") === "box-4" &&
+            cell.getAttribute("id") === "box-7") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-2" &&
+            cell.getAttribute("id") === "box-5" &&
+            cell.getAttribute("id") === "box-8") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-3" &&
+            cell.getAttribute("id") === "box-6" &&
+            cell.getAttribute("id") === "box-9") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-1" &&
+            cell.getAttribute("id") === "box-5" &&
+            cell.getAttribute("id") === "box-9") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-3" &&
+            cell.getAttribute("id") === "box-5" &&
+            cell.getAttribute("id") === "box-7")
         ) {
-          console.log(true);
+          console.log("game over");
         }
       } else {
         let currentPlayer = document.createElement("p");
@@ -54,6 +70,42 @@ const playerMove = () => {
         cell.append(currentPlayer);
         playerTitle.innerHTML = "Player: 1";
         ticTacToeBoard.classList.toggle("player-turn");
+        if (
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-1" &&
+            cell.getAttribute("id") === "box-2" &&
+            cell.getAttribute("id") === "box-3") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-4" &&
+            cell.getAttribute("id") === "box-5" &&
+            cell.getAttribute("id") === "box-6") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-7" &&
+            cell.getAttribute("id") === "box-8" &&
+            cell.getAttribute("id") === "box-9") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-1" &&
+            cell.getAttribute("id") === "box-4" &&
+            cell.getAttribute("id") === "box-7") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-2" &&
+            cell.getAttribute("id") === "box-5" &&
+            cell.getAttribute("id") === "box-8") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-3" &&
+            cell.getAttribute("id") === "box-6" &&
+            cell.getAttribute("id") === "box-9") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-1" &&
+            cell.getAttribute("id") === "box-5" &&
+            cell.getAttribute("id") === "box-9") ||
+          (cell.contains(currentPlayer) &&
+            cell.getAttribute("id") === "box-3" &&
+            cell.getAttribute("id") === "box-5" &&
+            cell.getAttribute("id") === "box-7")
+        ) {
+          console.log("game over");
+        }
       }
     };
 
@@ -107,3 +159,4 @@ const startGame = () => {
 };
 
 startGame();
+playerMove();
