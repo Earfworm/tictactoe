@@ -6,7 +6,18 @@ const ticTacToeBoard = document.querySelector(".tic-tac-toe-container");
 const cells = document.querySelectorAll(".cell");
 const startPauseBtn = document.querySelector(".start-btn");
 const resetBtn = document.querySelector(".resetBtn");
-
+const cellsClicked = [];
+const winningMoves = [
+  "box-1",
+  "box-2",
+  "box-3",
+  "box-4",
+  "box-5",
+  "box-6",
+  "box-7",
+  "box-8",
+  "box-9",
+];
 let seconds = 0;
 let minutes = 0;
 let displaySeconds = 0;
@@ -27,41 +38,22 @@ const playerMove = () => {
         cell.append(currentPlayer);
         playerTitle.innerHTML = "Player: 2";
         ticTacToeBoard.classList.toggle("player-turn");
+        cellsClicked.push(cell.getAttribute("id"));
         if (
-          (cell.contains(currentPlayer) &&
-            cell.getAttribute("id") === "box-1" &&
-            cell.getAttribute("id") === "box-2" &&
-            cell.getAttribute("id") === "box-3") ||
-          (cell.contains(currentPlayer) &&
-            cell.getAttribute("id") === "box-4" &&
-            cell.getAttribute("id") === "box-5" &&
-            cell.getAttribute("id") === "box-6") ||
-          (cell.contains(currentPlayer) &&
-            cell.getAttribute("id") === "box-7" &&
-            cell.getAttribute("id") === "box-8" &&
-            cell.getAttribute("id") === "box-9") ||
-          (cell.contains(currentPlayer) &&
-            cell.getAttribute("id") === "box-1" &&
-            cell.getAttribute("id") === "box-4" &&
-            cell.getAttribute("id") === "box-7") ||
-          (cell.contains(currentPlayer) &&
-            cell.getAttribute("id") === "box-2" &&
-            cell.getAttribute("id") === "box-5" &&
-            cell.getAttribute("id") === "box-8") ||
-          (cell.contains(currentPlayer) &&
-            cell.getAttribute("id") === "box-3" &&
-            cell.getAttribute("id") === "box-6" &&
-            cell.getAttribute("id") === "box-9") ||
-          (cell.contains(currentPlayer) &&
-            cell.getAttribute("id") === "box-1" &&
-            cell.getAttribute("id") === "box-5" &&
-            cell.getAttribute("id") === "box-9") ||
-          (cell.contains(currentPlayer) &&
-            cell.getAttribute("id") === "box-3" &&
-            cell.getAttribute("id") === "box-5" &&
-            cell.getAttribute("id") === "box-7")
+          (cellsClicked[0] === winningMoves[0] &&
+            cellsClicked[1] === winningMoves[1] &&
+            cellsClicked[2] === winningMoves[2]) ||
+          (cellsClicked[0] === winningMoves[3] &&
+            cellsClicked[1] === winningMoves[4] &&
+            cellsClicked[2] === winningMoves[5]) ||
+          (cellsClicked[0] === winningMoves[6] &&
+            cellsClicked[1] === winningMoves[7] &&
+            cellsClicked[2] === winningMoves[8])
         ) {
           console.log("game over");
+        } else {
+          console.log(false);
+          console.log(cellsClicked, winningMoves);
         }
       } else {
         let currentPlayer = document.createElement("p");
