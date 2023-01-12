@@ -29,7 +29,7 @@ let stopWatchStatus = "stopped";
 ticTacToeBoard.classList.add("player-turn");
 //functions
 
-const playerClicked = (playerClickInput) => {
+const playerClicked = (playerClickInput, playerTitleInput) => {
   if (
     //     // horizontal 1st row
     (playerClickInput.includes("box-1") &&
@@ -65,6 +65,7 @@ const playerClicked = (playerClickInput) => {
       playerClickInput.includes("box-7"))
   ) {
     console.log("game over");
+    playerTitle.textContent = `Player ${playerTitleInput} Wins`;
   }
 };
 const playerMove = () => {
@@ -79,7 +80,7 @@ const playerMove = () => {
         ticTacToeBoard.classList.toggle("player-turn");
         playerXClicked.push(cell.getAttribute("id"));
         console.log(playerXClicked);
-        playerClicked(playerXClicked);
+        playerClicked(playerXClicked, 1);
       } else {
         let currentPlayer = document.createElement("p");
         currentPlayer.classList.add("player-2");
@@ -89,11 +90,14 @@ const playerMove = () => {
         ticTacToeBoard.classList.toggle("player-turn");
         playerOClicked.push(cell.getAttribute("id"));
         console.log(playerOClicked);
-        playerClicked(playerOClicked);
+        playerClicked(playerOClicked, 2);
       }
     };
-
-    cell.addEventListener("click", playerEventListener, { once: true });
+    if (startPauseBtn === "Start Game") {
+      cell.removeEventListener("click", playerEventListener);
+    } else if (startPauseBtn.textContent === "Pause") {
+      cell.addEventListener("click", playerEventListener, { once: true });
+    }
   });
 };
 const stopWatch = () => {
@@ -132,117 +136,15 @@ const startStop = () => {
 
 const startGame = () => {
   startPauseBtn.addEventListener("click", () => {
-    if (startPauseBtn.textContent === "Start Game") {
+    console.log(startPauseBtn);
+    if (startPauseBtn) {
       startPauseBtn.textContent = "Pause";
       startStop();
-    } else if ((startPauseBtn.textContent = "Pause")) {
+      playerMove();
+    } else if (startPauseBtn.textContent === "Pause") {
       startPauseBtn.textContent = "Start Game";
-      startStop();
     }
   });
 };
 
 startGame();
-playerMove();
-
-// for (let i = 0; i < playerOClicked.length; i++) {
-//   console.log(playerOClicked[0].getAttribute("id"));
-//   console.log(playerOClicked[i].getAttribute("id") === winningMoves[0]);
-//   if (
-//     // horizontal 1st row
-//     playerOClicked[i].getAttribute("id") === winningMoves[0] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[0] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[0]
-//   ) {
-//     gameOver += gameOver.push(playerOClicked[i].getAttribute("id"));
-//     console.log(gameOver);
-//   } else if (
-//     // horizontal 2nd row
-//     playerOClicked[i].getAttribute("id") === winningMoves[3] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[4] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[5]
-//   ) {
-//     gameOver.push(playerOClicked[i].getAttribute("id"));
-//   } else if (
-//     // horizontal 3rd row
-//     playerOClicked[i].getAttribute("id") === winningMoves[6] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[7] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[8]
-//   ) {
-//     gameOver.push(playerOClicked[i]);
-//   } else if (
-//     // vertical 1st row
-//     playerOClicked[i].getAttribute("id") === winningMoves[0] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[4] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[6]
-//   ) {
-//     gameOver.push(playerOClicked[i]);
-//   } else if (
-//     // vertical 2nd row
-//     playerOClicked[i].getAttribute("id") === winningMoves[1] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[4] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[7]
-//   ) {
-//     gameOver.push(playerOClicked[i]);
-//   } else if (
-//     // vertical 3rd row
-//     playerOClicked[i].getAttribute("id") === winningMoves[2] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[5] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[8]
-//   ) {
-//     gameOver.push(playerOClicked[i]);
-//   } else if (
-//     // cells 1-5-9
-//     playerOClicked[i].getAttribute("id") === winningMoves[0] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[4] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[8]
-//   ) {
-//     gameOver.push(playerOClicked[i]);
-//   } else if (
-//     // cells 3-5-7
-//     playerOClicked[i].getAttribute("id") === winningMoves[2] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[4] &&
-//     playerOClicked[i].getAttribute("id") === winningMoves[6]
-//   ) {
-//     gameOver.push(playerOClicked[i]);
-//   }
-//   {
-//   }
-// }
-
-// // const clickedCell = playerOClicked.filter((cellClicked) => {
-// //   return (
-// //     // horizontal 1st row
-// (playerOClicked.includes("box-1") &&
-// playerOClicked.includes("box-2") &&
-// playerOClicked.includes("box-3")) ||
-// //       // horizontal 2nd row
-// (playerOClicked.includes("box-4") &&
-// playerOClicked.includes("box-5") &&
-// playerOClicked.includes("box-6")) ||
-// //       // horizontal 3rd row
-// (playerOClicked.includes("box-7") &&
-//             playerOClicked.includes("box-8") &&
-//             playerOClicked.includes("box-9")) ||
-// //       // vertical 1st row
-// (playerOClicked.includes("box-1") &&
-//             playerOClicked.includes("box-4") &&
-//             playerOClicked.includes("box-7")) ||
-// //       // vertical 2nd row
-// (playerOClicked.includes("box-2") &&
-//             playerOClicked.includes("box-5") &&
-//             playerOClicked.includes("box-8")) ||
-// //       // vertical 3rd row
-// (playerOClicked.includes("box-3") &&
-//             playerOClicked.includes("box-6") &&
-//             playerOClicked.includes("box-9")) ||
-// //       // cells 1-5-9
-// (playerOClicked.includes("box-1") &&
-//             playerOClicked.includes("box-5") &&
-//             playerOClicked.includes("box-9")) ||
-// //       // cells 3-5-7
-// (playerOClicked.includes("box-3") &&
-//             playerOClicked.includes("box-5") &&
-//             playerOClicked.includes("box-7")) ||
-//   );
-// // });
