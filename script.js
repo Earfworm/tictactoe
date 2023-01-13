@@ -130,8 +130,8 @@ const playerMove = () => {
 
     if (startPauseBtn.textContent === "Pause") {
       cell.addEventListener("click", playerEventListener, { once: true });
-    } else {
-      startPauseBtn.removeEventListener("click", playerEventListener);
+    } else if (startPauseBtn.textContent === "Start Game") {
+      cell.removeEventListener("click", playerEventListener);
     }
   });
 };
@@ -145,7 +145,6 @@ const startGame = () => {
       playerMove();
     } else if (e.target.textContent === "Pause") {
       startPauseBtn.textContent = "Start Game";
-      startPauseBtn.removeEventListener("click", playerMove);
     }
   });
 };
