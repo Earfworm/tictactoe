@@ -105,7 +105,10 @@ const playerClicked = (playerClickInput, playerTitleInput) => {
 const playerMove = () => {
   cells.forEach((cell) => {
     const playerEventListener = () => {
-      if (ticTacToeBoard.classList.contains("player-turn")) {
+      if (
+        ticTacToeBoard.classList.contains("player-turn") &&
+        startPauseBtn.textContent === "Pause"
+      ) {
         let currentPlayer = document.createElement("p");
         currentPlayer.classList.add("player-1");
         currentPlayer.innerHTML = "X";
@@ -115,7 +118,10 @@ const playerMove = () => {
         playerXClicked.push(cell.getAttribute("id"));
         console.log(playerXClicked);
         playerClicked(playerXClicked, 1);
-      } else {
+      } else if (
+        !ticTacToeBoard.classList.contains("player-turn") &&
+        startPauseBtn.textContent === "Pause"
+      ) {
         let currentPlayer = document.createElement("p");
         currentPlayer.classList.add("player-2");
         currentPlayer.innerHTML = "O";
@@ -127,20 +133,17 @@ const playerMove = () => {
         playerClicked(playerOClicked, 2);
       }
     };
-
-    cell.addEventListener("click", playerEventListener, { once: true });
+    cell.addEventListener("click", playerEventListener);
   });
 };
 
 const startGame = () => {
   startPauseBtn.addEventListener("click", (e) => {
     console.log(startPauseBtn);
-    if (e.target.textContent || e.target.textContent === "Start") {
+    if (e.target || e.target.textContent === "Start") {
       console.log(e.target.textContent);
       startPauseBtn.textContent = "Pause";
-
       startStop();
-      playerMove();
     } else if (e.target.textContent === "Pause") {
       startPauseBtn.textContent = "Start";
     }
@@ -148,3 +151,4 @@ const startGame = () => {
 };
 
 startGame();
+playerMove();
