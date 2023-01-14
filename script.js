@@ -59,7 +59,7 @@ const startStop = () => {
   } else {
     clearInterval(interval);
     stopWatchStatus = "stopped";
-    startPauseBtn.textContent = "Start Game";
+    startPauseBtn.textContent = "Start";
   }
 };
 
@@ -128,23 +128,21 @@ const playerMove = () => {
       }
     };
 
-    if (startPauseBtn.textContent === "Pause") {
-      cell.addEventListener("click", playerEventListener, { once: true });
-    } else if (startPauseBtn.textContent === "Start Game") {
-      cell.removeEventListener("click", playerEventListener);
-    }
+    cell.addEventListener("click", playerEventListener, { once: true });
   });
 };
 
 const startGame = () => {
   startPauseBtn.addEventListener("click", (e) => {
     console.log(startPauseBtn);
-    if (e.target.textContent) {
+    if (e.target.textContent || e.target.textContent === "Start") {
+      console.log(e.target.textContent);
       startPauseBtn.textContent = "Pause";
+
       startStop();
       playerMove();
     } else if (e.target.textContent === "Pause") {
-      startPauseBtn.textContent = "Start Game";
+      startPauseBtn.textContent = "Start";
     }
   });
 };
