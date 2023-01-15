@@ -7,15 +7,20 @@ body {
   height: 100vh;
   margin: 0;
   font-family: "Rock Salt", cursive;
+  background-color: #6290c3;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #c2e7da;
+  color: #f1ffe7;
+  text-shadow: 1px 1px 2px #1a1b41;
 }
 
 h1 {
+  padding-left: 50px;
 }
 
 .game-clock-container {
@@ -24,6 +29,8 @@ h1 {
   align-items: center;
   justify-content: center;
   transform: translateX(-50%);
+  font-family: "DotGothic16", sans-serif;
+  font-size: 20px;
 }
 
 .game-clock-title {
@@ -31,12 +38,16 @@ h1 {
 }
 .clock {
   display: flex;
-  margin-top: -15px;
+  color: #1a1b41;
+  text-shadow: 1px 1px 4px #f1ffe7;
 }
 .player-title {
+  display: flex;
+  padding-right: 50px;
 }
 
 main {
+  margin-top: 50px;
 }
 
 .tic-tac-toe-container {
@@ -44,8 +55,6 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
   margin-top: 20px;
 }
 
@@ -55,15 +64,54 @@ main {
 
 .cell {
   display: flex;
-  border: 1px solid black;
-  height: 100px;
-  width: 100px;
+  justify-content: center;
+  align-items: center;
+  border-right: 2px solid #1a1b41;
+  border-bottom: 2px solid #1a1b41;
+  height: 130px;
+  width: 130px;
 }
 
-.current-player {
+.cell:hover {
+  background-color: #c2e7da;
+}
+
+.cell:nth-child(3n) {
+  border-right: none;
+}
+
+#box-7,
+#box-8,
+#box-9 {
+  border-bottom: none;
+}
+
+.player-1,
+.player-2 {
+  font-size: 20px;
+  color: #f1ffe7;
+  text-shadow: 1px 1px 2px #1a1b41;
 }
 
 button {
-  width: 100px;
+  width: 12%;
+  padding: 10px;
+  font-family: "DotGothic16", sans-serif;
+  background-color: #f1ffe7;
+  color: #1a1b41;
+  border: none;
+  box-shadow: 10px 5px 5px #1a1b41;
+}
+
+.start-btn {
+  margin-top: 50px;
+}
+
+.reset-btn {
   margin-top: 10px;
+}
+
+.start-btn:hover,
+.reset-btn:hover {
+  background-color: #c2e7da;
 }
