@@ -25,7 +25,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform: translateX(-50%);
+  transform: translateX(-60%);
   font-family: "DotGothic16", sans-serif;
   font-size: 20px;
 }
@@ -37,6 +37,7 @@ h1 {
   display: flex;
   color: #1a1b41;
   text-shadow: 1px 1px 4px #f1ffe7;
+  margin-top: -20px;
 }
 .player-title {
   display: flex;
@@ -97,6 +98,7 @@ button {
   color: #1a1b41;
   border: none;
   box-shadow: 10px 5px 5px #1a1b41;
+  transition: all 0.5s;
 }
 
 .start-btn {
@@ -110,4 +112,6 @@ button {
 .start-btn:hover,
 .reset-btn:hover {
   background-color: #c2e7da;
+  letter-spacing: 5px;
+  width: 15%;
 }
