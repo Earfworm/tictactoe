@@ -1,13 +1,10 @@
-* {
+body {
+  height: 100vh;
+  font-family: "Rock Salt", cursive;
+  background-color: #6290c3;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-body {
-  height: 100vh;
-  margin: 0;
-  font-family: "Rock Salt", cursive;
-  background-color: #6290c3;
 }
 
 header {
@@ -47,7 +44,7 @@ h1 {
 }
 
 main {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .tic-tac-toe-container {
@@ -55,7 +52,6 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 }
 
 .row {
@@ -68,8 +64,8 @@ main {
   align-items: center;
   border-right: 2px solid #1a1b41;
   border-bottom: 2px solid #1a1b41;
-  height: 130px;
-  width: 130px;
+  height: 100px;
+  width: 100px;
 }
 
 .cell:hover {
@@ -104,7 +100,7 @@ button {
 }
 
 .start-btn {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .reset-btn {
