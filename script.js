@@ -5,9 +5,9 @@ const playerTitle = document.querySelector(".player-title");
 const ticTacToeBoard = document.querySelector(".tic-tac-toe-container");
 const cells = document.querySelectorAll(".cell");
 const startPauseBtn = document.querySelector(".start-btn");
-const resetBtn = document.querySelector(".resetBtn");
-const playerXClicked = [];
-const playerOClicked = [];
+const resetBtn = document.querySelector(".reset-btn");
+let playerXClicked = [];
+let playerOClicked = [];
 const winningMoves = [
   "box-1",
   "box-2",
@@ -100,7 +100,13 @@ const playerClicked = (playerClickInput, playerTitleInput) => {
   ) {
     console.log("game over");
     playerTitle.textContent = `Player ${playerTitleInput} Wins`;
+    startStop();
   }
+  // else if () {
+  //   console.log("game over");
+  //   playerTitle.textContent = `Game Tied`;
+  //   startStop();
+  // }
 };
 const playerMove = () => {
   cells.forEach((cell) => {
@@ -113,11 +119,14 @@ const playerMove = () => {
         currentPlayer.classList.add("player-1");
         currentPlayer.innerHTML = "X";
         cell.append(currentPlayer);
-        playerTitle.innerHTML = "Player: 2";
+        playerTitle.innerHTML = "Player 2";
         ticTacToeBoard.classList.toggle("player-turn");
         playerXClicked.push(cell.getAttribute("id"));
         console.log(playerXClicked);
         playerClicked(playerXClicked, 1);
+        if (cell.lastChild === currentPlayer) {
+          cell.removeEventListener("click", playerEventListener);
+        }
       } else if (
         !ticTacToeBoard.classList.contains("player-turn") &&
         startPauseBtn.textContent === "Pause"
@@ -126,11 +135,14 @@ const playerMove = () => {
         currentPlayer.classList.add("player-2");
         currentPlayer.innerHTML = "O";
         cell.append(currentPlayer);
-        playerTitle.innerHTML = "Player: 1";
+        playerTitle.innerHTML = "Player 1";
         ticTacToeBoard.classList.toggle("player-turn");
         playerOClicked.push(cell.getAttribute("id"));
         console.log(playerOClicked);
         playerClicked(playerOClicked, 2);
+        if (cell.lastChild === currentPlayer) {
+          cell.removeEventListener("click", playerEventListener);
+        }
       }
     };
     cell.addEventListener("click", playerEventListener);
@@ -149,6 +161,24 @@ const startGame = () => {
     }
   });
 };
+const resetGame = () => {
+  resetBtn.addEventListener("click", () => {
+    startPauseBtn.textContent = "Start Game";
+    gameClock.textContent = "0:00";
+    clearInterval(interval);
+    seconds = 0;
+    minutes = 0;
 
+    stopWatchStatus = "stopped";
+    playerTitle.textContent = "Player 1";
+    cells.forEach((cell) => {
+      if (cell.lastElementChild) {
+        console.log(cell, cell.lastElementChild);
+        cell.removeChild(cell.lastElementChild);
+      }
+    });
+  });
+};
 startGame();
 playerMove();
+resetGame();
