@@ -101,15 +101,38 @@ const playerClicked = (playerClickInput, playerTitleInput) => {
     console.log("game over");
     playerTitle.textContent = `Player ${playerTitleInput} Wins`;
     startStop();
+  } else if (
+    playerTitle.textContent !== `Player ${playerTitleInput} Wins` &&
+    playerXClicked.length === 5 &&
+    playerOClicked.length === 4
+  ) {
+    console.log("game over");
+    playerTitle.textContent = `Game Tied`;
+    startStop();
   }
-  // else if () {
-  //   console.log("game over");
-  //   playerTitle.textContent = `Game Tied`;
-  //   startStop();
-  // }
 };
 const playerMove = () => {
   cells.forEach((cell) => {
+    const resetGame = (currentPlayerInput) => {
+      resetBtn.addEventListener("click", () => {
+        startPauseBtn.textContent = "Start Game";
+        gameClock.textContent = "0:00";
+        clearInterval(interval);
+        seconds = 0;
+        minutes = 0;
+        stopWatchStatus = "stopped";
+        playerTitle.textContent = "Player 1";
+
+        if (cell.lastElementChild === currentPlayerInput) {
+          console.log(cell, cell.lastElementChild);
+          cell.removeChild(cell.lastElementChild);
+          cell.addEventListener("click", playerEventListener);
+          playerXClicked = [];
+          playerOClicked = [];
+          ticTacToeBoard.classList.add("player-turn");
+        }
+      });
+    };
     const playerEventListener = () => {
       if (
         ticTacToeBoard.classList.contains("player-turn") &&
@@ -127,6 +150,7 @@ const playerMove = () => {
         if (cell.lastChild === currentPlayer) {
           cell.removeEventListener("click", playerEventListener);
         }
+        resetGame(currentPlayer);
       } else if (
         !ticTacToeBoard.classList.contains("player-turn") &&
         startPauseBtn.textContent === "Pause"
@@ -143,6 +167,7 @@ const playerMove = () => {
         if (cell.lastChild === currentPlayer) {
           cell.removeEventListener("click", playerEventListener);
         }
+        resetGame(currentPlayer);
       }
     };
     cell.addEventListener("click", playerEventListener);
@@ -161,24 +186,6 @@ const startGame = () => {
     }
   });
 };
-const resetGame = () => {
-  resetBtn.addEventListener("click", () => {
-    startPauseBtn.textContent = "Start Game";
-    gameClock.textContent = "0:00";
-    clearInterval(interval);
-    seconds = 0;
-    minutes = 0;
 
-    stopWatchStatus = "stopped";
-    playerTitle.textContent = "Player 1";
-    cells.forEach((cell) => {
-      if (cell.lastElementChild) {
-        console.log(cell, cell.lastElementChild);
-        cell.removeChild(cell.lastElementChild);
-      }
-    });
-  });
-};
 startGame();
 playerMove();
-resetGame();

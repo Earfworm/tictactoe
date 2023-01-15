@@ -11,23 +11,26 @@ body {
 
 header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 }
 
 h1 {
-  /* margin-left: -110px; */
 }
 
 .game-clock-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
 }
 
 .game-clock-title {
+  display: flex;
 }
 .clock {
+  display: flex;
   margin-top: -15px;
 }
 .player-title {
